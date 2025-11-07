@@ -14,7 +14,7 @@ SDK em TypeScript inspirado na API da OpenAI para integrar com a StackSpot GenAI
 ## Instalação
 
 ```bash
-npm install @stackspot/sdk
+npm i stackspotdelsuc-sdk
 ```
 
 ## Configuração de ambiente

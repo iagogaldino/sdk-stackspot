@@ -27,11 +27,11 @@
   "author": "StackSpot",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stackspot/sdk-stackspot.git"
+    "url": "git+https://github.com/iagogaldino/sdk-stackspot.git"
   },
-  "homepage": "https://github.com/stackspot/sdk-stackspot#readme",
+  "homepage": "https://github.com/iagogaldino/sdk-stackspot#readme",
   "bugs": {
-    "url": "https://github.com/stackspot/sdk-stackspot/issues"
+    "url": "https://github.com/iagogaldino/sdk-stackspot/issues"
   },
   "license": "ISC",
   "dependencies": {

@@ -4,7 +4,7 @@
 
 SDK em TypeScript inspirado na API da OpenAI para integrar com a StackSpot GenAI API. Inclui helpers para criar threads, mensagens, executar agentes e orquestrar exemplos multiagentes.
 
-![StackSpot banner](docs/stackspot.jpg)
+![StackSpot banner](https://raw.githubusercontent.com/iagogaldino/sdk-stackspot/main/docs/stackspot.jpg)
 
 ## Requisitos
 

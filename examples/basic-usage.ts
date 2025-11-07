@@ -6,12 +6,28 @@
 
 import StackSpot from '../src/index';
 
-function requireEnv(varName: string): string {
-  const value = process.env[varName];
-  if (!value) {
-    throw new Error(`Variável de ambiente ${varName} não definida.`);
+type EnvConfig = {
+  key: string;
+  fallback?: string;
+};
+
+const directCredentials = {
+  clientId: '',
+  clientSecret: '',
+  agentId: '',
+};
+
+function resolveEnv({ key, fallback }: EnvConfig): string {
+  const envValue = process.env[key];
+  if (envValue && envValue.trim()) {
+    return envValue;
   }
-  return value;
+
+  if (fallback && fallback.trim()) {
+    return fallback.trim();
+  }
+
+  throw new Error(`Variável de ambiente ${key} não definida e nenhum valor padrão fornecido.`);
 }
 
 /**
@@ -23,8 +39,11 @@ function requireEnv(varName: string): string {
 async function exemploBasico() {
   // Inicializa o cliente StackSpot com credenciais externas
   const stackspot = new StackSpot({
-    clientId: requireEnv('STACKSPOT_CLIENT_ID'),
-    clientSecret: requireEnv('STACKSPOT_CLIENT_SECRET'),
+    clientId: resolveEnv({ key: 'STACKSPOT_CLIENT_ID', fallback: directCredentials.clientId }),
+    clientSecret: resolveEnv({
+      key: 'STACKSPOT_CLIENT_SECRET',
+      fallback: directCredentials.clientSecret,
+    }),
     realm: process.env.STACKSPOT_REALM || 'stackspot-freemium',
   });
 
@@ -44,7 +63,7 @@ async function exemploBasico() {
   console.log(`✅ Mensagem adicionada: ${userMessage.id}\n`);
 
   // 3. Criar e executar um run (usando o ID do agente do StackSpot)
-  const agentId = requireEnv('STACKSPOT_AGENT_ID');
+  const agentId = resolveEnv({ key: 'STACKSPOT_AGENT_ID', fallback: directCredentials.agentId });
   console.log(`🚀 Criando run com agente ${agentId}...`);
   const run = await stackspot.beta.threads.runs.create(thread.id, {
     assistant_id: agentId,

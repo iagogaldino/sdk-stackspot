@@ -39,6 +39,30 @@ const commandWhitelist = [
   `chromium-browser ${TARGET_URL}`,
 ];
 
+type EnvConfig = {
+  key: string;
+  fallback?: string;
+};
+
+const directCredentials = {
+  clientId: '7022296d-5677-40f6-9b71-618a5f259f8b',
+  clientSecret: 'jmWbk8mNO62846eyiikN6t4nvzFHpp2smgXPD511Jrk24Jnq32zwZ0S3i6Ys1dNR',
+  agentId: '01K9CGV7PDN62MPDG8RF0YDZMA',
+};
+
+function requireEnv(config: EnvConfig): string {
+  const envValue = process.env[config.key];
+  if (envValue && envValue.trim()) {
+    return envValue;
+  }
+
+  if (config.fallback && config.fallback.trim()) {
+    return config.fallback.trim();
+  }
+
+  throw new Error(`Variável de ambiente ${config.key} não definida e nenhum valor padrão fornecido.`);
+}
+
 const toolExecutor: ToolExecutor = async (functionName, args) => {
   if (functionName !== 'execute_command') {
     return `Erro: função ${functionName} não suportada neste exemplo.`;
@@ -65,14 +89,6 @@ const toolExecutor: ToolExecutor = async (functionName, args) => {
   }
 };
 
-function requireEnv(varName: string): string {
-  const value = process.env[varName];
-  if (!value) {
-    throw new Error(`Variável de ambiente ${varName} não definida.`);
-  }
-  return value;
-}
-
 /**
  * Pré-requisitos:
  * - Configure STACKSPOT_CLIENT_ID, STACKSPOT_CLIENT_SECRET e STACKSPOT_AGENT_ID no ambiente
@@ -81,9 +97,15 @@ function requireEnv(varName: string): string {
 
 async function abrirChromeComAgente() {
   const stackspot = new StackSpot({
-    clientId: requireEnv('STACKSPOT_CLIENT_ID'),
-    clientSecret: requireEnv('STACKSPOT_CLIENT_SECRET'),
-    realm: process.env.STACKSPOT_REALM || 'stackspot-freemium',
+    clientId: requireEnv({
+      key: 'STACKSPOT_CLIENT_ID',
+      fallback: directCredentials.clientId,
+    }),
+    clientSecret: requireEnv({
+      key: 'STACKSPOT_CLIENT_SECRET',
+      fallback: directCredentials.clientSecret,
+    }),
+    realm: 'stackspot-freemium',
     toolExecutor,
     enableFunctionCalling: true,
   });
@@ -112,7 +134,10 @@ async function abrirChromeComAgente() {
       + 'Use o execute_command conforme instruído, no formato exato informado.',
   });
 
-  const assistantId = requireEnv('STACKSPOT_AGENT_ID');
+  const assistantId = requireEnv({
+    key: 'STACKSPOT_AGENT_ID',
+    fallback: directCredentials.agentId,
+  });
   console.log(`🤖 Executando agente ${assistantId}...`);
 
   const run = await stackspot.beta.threads.runs.create(thread.id, {

@@ -20,10 +20,11 @@ type EnvConfig = {
   fallback?: string;
 };
 
+// Preencha abaixo com suas credenciais se preferir rodar sem variáveis de ambiente.
 const directCredentials = {
-  clientId: '7022296d-5677-40f6-9b71-618a5f259f8b',
-  clientSecret: 'jmWbk8mNO62846eyiikN6t4nvzFHpp2smgXPD511Jrk24Jnq32zwZ0S3i6Ys1dNR',
-  agentId: '01K9CGV7PDN62MPDG8RF0YDZMA',
+  clientId: 'seu_client_id_aqui',
+  clientSecret: 'seu_client_secret_aqui',
+  agentId: 'seu_agent_id_aqui',
 };
 
 function resolveEnv({ key, fallback }: EnvConfig): string {

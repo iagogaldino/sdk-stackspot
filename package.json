@@ -1,0 +1,50 @@
+{
+  "name": "@stackspot/sdk",
+  "version": "1.0.0",
+  "description": "SDK do StackSpot similar ao OpenAI SDK para integração com StackSpot GenAI API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "example:basic": "ts-node examples/basic-usage.ts",
+    "example:open-chrome": "ts-node examples/open-chrome-command.ts",
+    "example:create-page": "ts-node examples/create-simple-page.ts",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "stackspot",
+    "genai",
+    "ai",
+    "sdk",
+    "openai-compatible"
+  ],
+  "author": "StackSpot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stackspot/sdk-stackspot.git"
+  },
+  "homepage": "https://github.com/stackspot/sdk-stackspot#readme",
+  "bugs": {
+    "url": "https://github.com/stackspot/sdk-stackspot/issues"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/node-fetch": "^2.6.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

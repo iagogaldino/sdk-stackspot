@@ -1,6 +1,6 @@
 {
   "name": "stackspotdelsuc-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SDK do StackSpot similar ao OpenAI SDK para integração com StackSpot GenAI API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

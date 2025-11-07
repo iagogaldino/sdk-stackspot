@@ -4,10 +4,12 @@
 
 SDK em TypeScript inspirado na API da OpenAI para integrar com a StackSpot GenAI API. Inclui helpers para criar threads, mensagens, executar agentes e orquestrar exemplos multiagentes.
 
+![StackSpot banner](docs/stackspot.jpg)
+
 ## Requisitos
 
 - Node.js **18** ou superior (utilizado para `AbortSignal.timeout`).
-- Conta StackSpot criada no [portal StackSpot](https://ai.stackspot.com/) para obter credenciais e agentes disponíveis.
+- Conta StackSpot criada no [portal StackSpot](https://ai.stackspot.com/?campaignCode=01K8TQ5N0KJYQHJ01FYGP3WR53) para obter credenciais e agentes disponíveis.
 
 ## Instalação
 
